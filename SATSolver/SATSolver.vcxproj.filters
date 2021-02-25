@@ -18,5 +18,16 @@
     <ClCompile Include="SATSolver.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="CNF.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="MPLL.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Global.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
