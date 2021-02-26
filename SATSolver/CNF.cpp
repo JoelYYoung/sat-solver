@@ -30,9 +30,9 @@ ClauseNode* getLiteral(ClauseNode* targetNode, int index) {
 }
 
 //根据变元编号删除文字
-int deleteLiteral(ClauseNode* targetNode, int index) {
+int deleteLiteral(FormulaNode* targetNode, int index) {
 	if (targetNode == nullptr) return 0;
-	ClauseNode* p = targetNode;
+	ClauseNode* p = targetNode->data.clauseData;
 	int changed = 0;  //如果改变了，changed变为1
 	while (p->next && p->next->literalData != index) p = p->next;
 	if (p->next) {
@@ -41,16 +41,18 @@ int deleteLiteral(ClauseNode* targetNode, int index) {
 		free(p->next);
 		p->next = tmp;
 	}
+	targetNode->data.num--;
 	return changed;
 }
 
 //插入一个文字，采用头插法
-void insertLiteral(ClauseNode* targetNode, int data){
+void insertLiteral(FormulaNode* targetNode, int data){
 	if (targetNode == nullptr) return;
 	ClauseNode* newNode = (ClauseNode*)malloc(sizeof(newNode));
 	newNode->literalData = data;
-	newNode->next = targetNode->next;
-	targetNode->next = newNode;
+	newNode->next = targetNode->data.clauseData->next;
+	targetNode->data.clauseData->next = newNode;
+	targetNode->data.num++;
 }
 
 /*2.公式的函数声明*/
@@ -92,10 +94,46 @@ int hasVoidClause(FormulaNode* targetNode) {
 }
 
 //  查找公式中的单子句并返回子句节点指针，如果不存在返回nullptr
-ClauseNode* getUnitClause(FormulaNode* targetNode) {
-
+FormulaNode* getUnitClause(FormulaNode* targetNode) {
+	if (targetNode == nullptr)return nullptr;
+	FormulaNode* p = targetNode->next;
+	while (p) {
+		if (p->data.num == 1)return p;
+		p = p->next;
+	}
+	return nullptr;
 }
 
 //  删除公式中的子句
-int deleteClause(FormulaNode* header, FormulaNode* targetNode);
-//  向公式中插入子句并返回一个新的公式
+int deleteClause(FormulaNode* header, FormulaNode* targetNode) {
+	if (targetNode == nullptr)return 0;
+	FormulaNode* p = targetNode;
+	FormulaNode* tmp = nullptr;
+	while (p->next) {
+		if (p->next == targetNode) {
+			tmp = p->next->next;
+			free(p->next);
+			p->next = tmp;
+			return 1;
+		}
+		p = p->next;
+	}
+	return 0;
+}
+
+//  向公式中插入子句
+FormulaNode* insertClause(FormulaNode* header) {
+	FormulaNode* newNode = (FormulaNode*)malloc(sizeof(FormulaNode));
+	ClauseNode* newHeader = (ClauseNode*)malloc(sizeof(ClauseNode));
+	newNode->data.clauseData = newHeader;
+	newNode->data.num = 0;
+	newNode->next = header->next;
+	header->next = newNode;
+	return newNode;
+}
+
+//  向公式中插入子句并返回一个新的公式，data表示新的单子句的文字的值
+FormulaNode* deepInsert(FormulaNode* header, int data) {
+	//  复制一遍这个公式
+	FormulaNode* newheader = (FormulaNode*)malloc(sizeof())
+}

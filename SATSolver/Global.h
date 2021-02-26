@@ -31,9 +31,9 @@ void destroyClause(ClauseNode* targetNode);
 //  根据变元编号查找文字，index为需要查找的编号
 ClauseNode* getLiteral(ClauseNode* targetNode, int index);
 //  根据变元编号删除文字
-int deleteLiteral(ClauseNode* targetNode, int index);
+int deleteLiteral(FormulaNode* targetNode, int index);  //插入FormulaNode，因为需要更改里面的数字
 //  插入一个文字
-void insertLiteral(ClauseNode* targetNode, int data);
+void insertLiteral(FormulaNode* targetNode, int data);  //插入FormulaNode，因为需要更改里面的数字
 
 /*2.公式的函数声明*/
 //  新建公式（链表结构），返回表头节点
@@ -43,9 +43,12 @@ void destroyFormula(FormulaNode* targetNode);
 //  判断公式中是否存空子句
 int hasVoidClause(FormulaNode* targetNode);
 //  查找公式中的单子句并返回子句节点指针，如果不存在返回nullptr
-ClauseNode* getUnitClause(FormulaNode* targetNode);
+FormulaNode* getUnitClause(FormulaNode* targetNode);
 //  删除公式中的子句
 int deleteClause(FormulaNode* header, FormulaNode* targetNode);
+//  向公式中插入子句
+FormulaNode* insertClause(FormulaNode* header);
 //  向公式中插入子句并返回一个新的公式
+FormulaNode* deepInsert(FormulaNode* header);
 #endif
 
