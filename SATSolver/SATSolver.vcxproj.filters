@@ -21,7 +21,10 @@
     <ClCompile Include="CNF.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="MPLL.cpp">
+    <ClCompile Include="FileReader.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="DPLL.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

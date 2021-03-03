@@ -4,6 +4,7 @@
 #include <iostream>
 #include <fstream>
 #include <ctime>
+#include <string>
 
 using namespace std;
 // 第一种存储结构，链式存储结构
@@ -50,5 +51,12 @@ int deleteClause(FormulaNode* header, FormulaNode* targetNode);
 FormulaNode* insertClause(FormulaNode* header);
 //  向公式中插入子句并返回一个新的公式 pass
 FormulaNode* deepInsert(FormulaNode* header, int data);
+
+/*3.文件读取和验证*/
+FormulaNode* readCNFFile(int& varnum, string& filename);
+
+/*4. DPLL函数*/
+//  基本的DPLL函数，传入FormulaNode指针，输出是否是可满足的
+int DPLL(FormulaNode* header);
 #endif
 

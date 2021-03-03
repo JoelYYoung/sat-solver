@@ -25,7 +25,7 @@ void destroyClause(ClauseNode* targetNode) {
 ClauseNode* getLiteral(ClauseNode* targetNode, int index) {
 	if (targetNode == nullptr) return nullptr;
 	ClauseNode* p = targetNode->next;
-	while (p && (p->literalData != index && p->literalData != (-index))) {
+	while (p && (p->literalData != index)) {  //必须是相同的文字，不能是相反的文字
 		cout << "p->literalData = " << p->literalData << endl;
 		cout << "index = " << index << endl;
 		p = p->next;
@@ -41,9 +41,10 @@ int deleteLiteral(FormulaNode* targetNode, int index) {
 	while (p->next && p->next->literalData != index && p->next->literalData != -index) p = p->next;
 	if (p->next) {
 		changed = 1;
-		ClauseNode* tmp = p->next->next;
-		free(p->next);
-		p->next = tmp;
+		ClauseNode* tmp = p->next;
+		cout << p->next->literalData << "yes!" << endl;
+		p->next = p->next->next;
+		free(tmp);
 	}
 	targetNode->data.num--;
 	return changed;
@@ -52,7 +53,7 @@ int deleteLiteral(FormulaNode* targetNode, int index) {
 //插入一个文字，采用头插法
 void insertLiteral(FormulaNode* targetNode, int data){
 	if (targetNode == nullptr) return;
-	ClauseNode* newNode = (ClauseNode*)malloc(sizeof(newNode));
+	ClauseNode* newNode = (ClauseNode*)malloc(sizeof(ClauseNode));
 	newNode->literalData = data;
 	newNode->next = targetNode->data.clauseData->next;
 	targetNode->data.clauseData->next = newNode;
@@ -88,7 +89,7 @@ int hasVoidClause(FormulaNode* targetNode) {
 	int result = 0;
 	FormulaNode* p = targetNode->next;
 	while (p) {
-		if (p->data.num == 0) {
+		if (p->data.clauseData->next == nullptr) {
 			result = 1;
 			break;
 		}
@@ -111,11 +112,12 @@ FormulaNode* getUnitClause(FormulaNode* targetNode) {
 //  删除公式中的子句
 int deleteClause(FormulaNode* header, FormulaNode* targetNode) {
 	if (targetNode == nullptr)return 0;
-	FormulaNode* p = targetNode;
+	FormulaNode* p = header;
 	FormulaNode* tmp = nullptr;
 	while (p->next) {
 		if (p->next == targetNode) {
 			tmp = p->next->next;
+			if (tmp == nullptr) cout << "tmp is nullptr!!!" << endl;
 			free(p->next);
 			p->next = tmp;
 			return 1;
@@ -125,7 +127,7 @@ int deleteClause(FormulaNode* header, FormulaNode* targetNode) {
 	return 0;
 }
 
-//  向公式中插入子句
+//  向公式中插入子句，并返回新插入子句的指针
 FormulaNode* insertClause(FormulaNode* header) {
 	FormulaNode* newNode = (FormulaNode*)malloc(sizeof(FormulaNode));
 	ClauseNode* newHeader = createClause();
@@ -157,7 +159,8 @@ FormulaNode* deepInsert(FormulaNode* header, int data) {
 	fp->next = newNode;
 	fp = fp->next;
 	while (fq) {  //如果有的话
-		ClauseNode* cp = (ClauseNode*)malloc(sizeof(ClauseNode));
+		ClauseNode* cheader = (ClauseNode*)malloc(sizeof(ClauseNode));
+		ClauseNode* cp = cheader;
 		cp->literalData = 0;
 		cp->next = nullptr;
 		ClauseNode* cq = fq->data.clauseData->next;
@@ -171,7 +174,7 @@ FormulaNode* deepInsert(FormulaNode* header, int data) {
 		}
 		fp->next = (FormulaNode*)malloc(sizeof(FormulaNode));
 		fp = fp->next;
-		fp->data.clauseData = cp;
+		fp->data.clauseData = cheader;
 		fp->data.num = fq->data.num;
 		fp->next = nullptr;
 		fq = fq->next;

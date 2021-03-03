@@ -3,20 +3,25 @@
 
 int main()
 {
-    cout << "Test structure:" << endl;
+    string filename = R"(problem1-20.cnf)";
+    int varnum = 0;
+    /*
     FormulaNode* header = createFormula();
     FormulaNode* newNode = insertClause(header);
     insertLiteral(newNode, 1);
-    FormulaNode* unitClause = getUnitClause(header);
-    cout << "result1:" << unitClause->data.clauseData->next->literalData<<endl;
-    FormulaNode* newheader = deepInsert(header, -1);
-    ClauseNode* result = getLiteral(newheader->next->data.clauseData, 1);
-    if (result != nullptr) cout << "Success" << endl;
-    int result1 = deleteLiteral(newheader->next, 1);
-    cout << "result2:" << result1<<endl;
-    FormulaNode* newheader1 = deepInsert(newheader, 2);
-    int result2 = hasVoidClause(newheader1);
-    deleteClause(header, unitClause);
-    cout << "firstClause:" << header->next->data.clauseData->next->literalData<<endl;
-    cout << result2 << endl<<endl;
+    insertLiteral(newNode, 2);
+    insertLiteral(newNode, 3);
+    deleteLiteral(newNode, 2);
+    cout << "The next Literal is: " << newNode->data.clauseData->next->literalData<<endl;*/
+    //cout << "First Clause:" << header->next->data.clauseData->next->next->literalData << endl;
+    FormulaNode* header = readCNFFile(varnum, filename);
+    /*FormulaNode* unitClause = getUnitClause(header);
+    if (unitClause != nullptr) {
+        cout << unitClause->data.clauseData->next->literalData << endl;
+    }
+    else {
+        cout << "is not Nullptr" << endl;
+    }*/
+    int result = DPLL(header);
+    cout << "result is :" << result<<endl;
 }
