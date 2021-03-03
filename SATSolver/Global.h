@@ -57,6 +57,6 @@ FormulaNode* readCNFFile(int& varnum, string& filename);
 
 /*4. DPLL函数*/
 //  基本的DPLL函数，传入FormulaNode指针，输出是否是可满足的
-int DPLL(FormulaNode* header);
+int DPLL(FormulaNode* header, int* result);
 #endif
 

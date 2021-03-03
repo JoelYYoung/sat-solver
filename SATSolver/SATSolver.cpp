@@ -3,25 +3,17 @@
 
 int main()
 {
-    string filename = R"(problem1-20.cnf)";
+    string filename = R"(sat-20.cnf)";
     int varnum = 0;
-    /*
-    FormulaNode* header = createFormula();
-    FormulaNode* newNode = insertClause(header);
-    insertLiteral(newNode, 1);
-    insertLiteral(newNode, 2);
-    insertLiteral(newNode, 3);
-    deleteLiteral(newNode, 2);
-    cout << "The next Literal is: " << newNode->data.clauseData->next->literalData<<endl;*/
-    //cout << "First Clause:" << header->next->data.clauseData->next->next->literalData << endl;
     FormulaNode* header = readCNFFile(varnum, filename);
-    /*FormulaNode* unitClause = getUnitClause(header);
-    if (unitClause != nullptr) {
-        cout << unitClause->data.clauseData->next->literalData << endl;
-    }
-    else {
-        cout << "is not Nullptr" << endl;
-    }*/
-    int result = DPLL(header);
+    time_t first, second;
+    first = time(NULL);
+    int* solution = (int*)malloc(sizeof(int) * varnum);
+    int result = DPLL(header, solution);
+    second = time(NULL);
     cout << "result is :" << result<<endl;
+    cout << "time:" << difftime(second, first);
+    for (int i = 0; i < varnum; i++) {
+        cout << solution[i] << ' ';
+    }
 }
