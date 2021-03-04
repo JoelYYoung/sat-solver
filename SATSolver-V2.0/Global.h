@@ -3,6 +3,7 @@
 #include <iostream>
 #include <fstream>
 #include <ctime>
+#include <stdlib.h>
 
 using namespace std;
 #define TRUE 1
@@ -10,11 +11,13 @@ using namespace std;
 #define EXIST 1
 #define DELETE 0
 
+struct LiteralNode;
+
 typedef struct ClauseNode {
 	int num;
 	int flag; //指示子句是否已经被删除
 	struct ClauseNode* nextClause;
-
+	LiteralNode* data;
 }ClauseNode;
 
 typedef struct LiteralNode {
@@ -28,5 +31,11 @@ typedef struct LiteralNode {
 typedef struct Variable {
 	LiteralNode* firstLiteral; //指示第一个包含这个子句的
 	LiteralNode* tmp; //用来在创建链表的时候作为临时指针，从而实现尾插
-	int num; //存储文字被包含在多少个子句中
 }Variable;
+
+//创建一个公式并返回表头节点
+ClauseNode* createFormula(Variable*& variableList, int variableNum);
+//新建一个子句，并返回子句的节点指针（文字带有表头节点）
+ClauseNode* insertClause(ClauseNode* header);
+//在子句中插入一个新的文字
+void insertLiteral(ClauseNode* clause, int data, Variable* variableList);

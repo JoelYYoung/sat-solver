@@ -3,7 +3,7 @@
 
 int main()
 {
-    string filename = R"(sat-20.cnf)";
+    string filename = R"(1.cnf)";
     int varnum = 0;
     FormulaNode* header = readCNFFile(varnum, filename);
     time_t first, second;

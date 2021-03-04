@@ -1,20 +1,32 @@
 ﻿// SATSolver-V2.0.cpp : 此文件包含 "main" 函数。程序执行将在此处开始并结束。
 //
 
-#include <iostream>
+#include "Global.h"
 
 int main()
 {
-    std::cout << "Hello World!\n";
+    //cout << "Test Starting:"<<endl;
+    //cout << "Create Formula." << endl;
+    //int varnum = 3;
+    //Variable* variableList = (Variable*)malloc(sizeof(Variable) * varnum);
+    //ClauseNode* header = createFormula(variableList, varnum);
+    //cout << "Formula Created." << endl;
+    //cout << "Insert 3 Clauses." << endl;
+    //ClauseNode* firstClause = insertClause(header);
+    //ClauseNode* secondClause = insertClause(header);
+    //ClauseNode* thirdClause = insertClause(header);
+    //cout << "Clauses Inserted." << endl;
+    //cout << "Insert Literals" << endl;
+    //insertLiteral(firstClause, 1, variableList);
+    //cout << "First Literal Inserted." << endl;
+    //insertLiteral(firstClause, 2, variableList);
+    //insertLiteral(secondClause, -1, variableList);
+    //insertLiteral(secondClause, 3, variableList);
+    //insertLiteral(thirdClause, -3, variableList);
+    //insertLiteral(thirdClause, -2, variableList);
+    //cout << "Literals Inserted." << endl;
+    //cout << "Verifiy." << endl;
+    //cout << "The firstClause has " << header->nextClause->num << " literals."<<endl;
+    //cout << "Variable 2's second literal is " << variableList[1].firstLiteral->nextCounterpart->data << "."<<endl;
+
 }
-
-// 运行程序: Ctrl + F5 或调试 >“开始执行(不调试)”菜单
-// 调试程序: F5 或调试 >“开始调试”菜单
-
-// 入门使用技巧: 
-//   1. 使用解决方案资源管理器窗口添加/管理文件
-//   2. 使用团队资源管理器窗口连接到源代码管理
-//   3. 使用输出窗口查看生成输出和其他消息
-//   4. 使用错误列表窗口查看错误
-//   5. 转到“项目”>“添加新项”以创建新的代码文件，或转到“项目”>“添加现有项”以将现有代码文件添加到项目
-//   6. 将来，若要再次打开此项目，请转到“文件”>“打开”>“项目”并选择 .sln 文件
