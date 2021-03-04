@@ -4,6 +4,7 @@
 #include <fstream>
 #include <ctime>
 #include <stdlib.h>
+#include <stack>
 
 using namespace std;
 #define TRUE 1
@@ -39,3 +40,8 @@ ClauseNode* createFormula(Variable*& variableList, int variableNum);
 ClauseNode* insertClause(ClauseNode* header);
 //在子句中插入一个新的文字
 void insertLiteral(ClauseNode* clause, int data, Variable* variableList);
+//传入一stack，能够找出列表中所有的单子句，然后入栈（指针）
+void getUnitclause(ClauseNode* header, stack<ClauseNode*>& unitClause);
+
+//传入文件名，读取文件并且返回variableList，以及unitClause
+ClauseNode* readCNFFile(int& varnum, string& filename, Variable*& variableList, stack<ClauseNode*>& unitClause);

@@ -29,4 +29,13 @@ int main()
     //cout << "The firstClause has " << header->nextClause->num << " literals."<<endl;
     //cout << "Variable 2's second literal is " << variableList[1].firstLiteral->nextCounterpart->data << "."<<endl;
 
+
+    //正式开始进行文件读取操作
+    string filename = R"(my.cnf)";
+    int varnum = 0;
+    stack<ClauseNode*> unitClause;
+    Variable* variableList = nullptr;
+    ClauseNode* header = readCNFFile(varnum, filename, variableList, unitClause);
+    cout << "There are " << unitClause.size() << " unitclauses in the formula." << endl;
+    cout << "The first Literal is " << header->nextClause->data->nextLiteral->data <<" ."<< endl;
 }

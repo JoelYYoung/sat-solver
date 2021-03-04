@@ -26,7 +26,7 @@ ClauseNode* insertClause(ClauseNode* header) {
 	newNode->data = literalHeader;
 	newNode->flag = 1;
 	newNode->num = 0;
-	newNode->nextClause = nullptr;
+	newNode->nextClause = header->nextClause;
 	header->nextClause = newNode;
 	return newNode;
 }
@@ -52,3 +52,11 @@ void insertLiteral(ClauseNode* clause, int data, Variable* variableList) {
 	clause->num++; //记得更新三个地方，clause num, variable table, unitClause stack
 }
 
+//传入一stack，能够找出列表中所有的单子句，然后入栈（指针）
+void getUnitclause(ClauseNode* header, stack<ClauseNode*>& unitClause) {
+	ClauseNode* tmp = header->nextClause;
+	while (tmp) {
+		if (tmp->num == 1) unitClause.push(tmp);
+		tmp = tmp->nextClause;
+	}
+}
