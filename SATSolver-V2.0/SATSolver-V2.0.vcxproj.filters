@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="SATSolver.cpp">
+    <ClCompile Include="SATSolver-V2.0.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="CNF.cpp">
@@ -30,7 +30,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Global.h">
-      <Filter>头文件</Filter>
+      <Filter>源文件</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

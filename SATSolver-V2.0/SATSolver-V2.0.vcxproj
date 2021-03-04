@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{24bcb1d3-a355-436e-90fd-f455b10fefbe}</ProjectGuid>
-    <RootNamespace>SATSolver</RootNamespace>
+    <ProjectGuid>{05a85829-38be-4f3e-8045-fde38fad520b}</ProjectGuid>
+    <RootNamespace>SATSolverV20</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -140,9 +140,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="CNF.cpp" />
-    <ClCompile Include="FileReader.cpp" />
     <ClCompile Include="DPLL.cpp" />
-    <ClCompile Include="SATSolver.cpp" />
+    <ClCompile Include="FileReader.cpp" />
+    <ClCompile Include="SATSolver-V2.0.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Global.h" />
