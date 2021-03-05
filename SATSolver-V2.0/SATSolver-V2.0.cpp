@@ -30,12 +30,26 @@ int main()
     //cout << "Variable 2's second literal is " << variableList[1].firstLiteral->nextCounterpart->data << "."<<endl;
 
 
-    //正式开始进行文件读取操作
-    string filename = R"(my.cnf)";
-    int varnum = 0;
+    ////正式开始进行文件读取操作
+    //string filename = R"(my.cnf)";
+    //int varnum = 0;
+    //stack<ClauseNode*> unitClause;
+    //Variable* variableList = nullptr;
+    //ClauseNode* header = readCNFFile(varnum, filename, variableList, unitClause);
+    //cout << "There are " << unitClause.size() << " unitclauses in the formula." << endl;
+    //cout << "The first Literal is " << header->nextClause->data->nextLiteral->data <<" ."<< endl;
+    ////文件读取测试完成
+
+    //开始开始测试DPLL过程
+    string filename = R"(7（unsatisfied）.cnf)";
+    int varnum = 0, clausenum = 0;
     stack<ClauseNode*> unitClause;
     Variable* variableList = nullptr;
-    ClauseNode* header = readCNFFile(varnum, filename, variableList, unitClause);
-    cout << "There are " << unitClause.size() << " unitclauses in the formula." << endl;
-    cout << "The first Literal is " << header->nextClause->data->nextLiteral->data <<" ."<< endl;
+    ClauseNode* header = readCNFFile(varnum, clausenum,filename, variableList, unitClause);
+    cout << "Num of unitClause is " << unitClause.size() << endl;
+    int* solution = (int*)malloc(sizeof(int) * varnum); 
+    time_t first = time(NULL);
+    cout << DPLL(header, variableList, unitClause, solution, clausenum) << endl;
+    time_t second = time(NULL);
+    cout << "Time: " << difftime(second, first) << endl;
 }

@@ -1,7 +1,7 @@
 #include "Global.h"
 
 // 输入文件名，和一个接受参数的引用变量varnum，读取文件后返回创建的内部表示
-ClauseNode* readCNFFile(int& varnum, string& filename, Variable*& variableList, stack<ClauseNode*>& unitClause) {
+ClauseNode* readCNFFile(int& varnum, int& clausenum,string& filename, Variable*& variableList, stack<ClauseNode*>& unitClause) {
 	string HFilePath = R"(CNFFile\)";
 	string path = HFilePath + filename;
 	ifstream fis(path);
@@ -36,6 +36,7 @@ ClauseNode* readCNFFile(int& varnum, string& filename, Variable*& variableList, 
 		fis.get(); //换行符
 	}
 	varnum = varNum; //返回值传递
+	clausenum = clauseNum;
 	getUnitclause(header, unitClause);
 	fis.close();
 	return header;

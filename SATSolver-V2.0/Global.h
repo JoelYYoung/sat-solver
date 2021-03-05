@@ -32,6 +32,7 @@ typedef struct LiteralNode {
 typedef struct Variable {
 	LiteralNode* firstLiteral; //指示第一个包含这个子句的
 	LiteralNode* tmp; //用来在创建链表的时候作为临时指针，从而实现尾插
+	int flag; //指示变量是否已经被赋值过了，0表示未赋值
 }Variable;
 
 //创建一个公式并返回表头节点
@@ -44,4 +45,10 @@ void insertLiteral(ClauseNode* clause, int data, Variable* variableList);
 void getUnitclause(ClauseNode* header, stack<ClauseNode*>& unitClause);
 
 //传入文件名，读取文件并且返回variableList，以及unitClause
-ClauseNode* readCNFFile(int& varnum, string& filename, Variable*& variableList, stack<ClauseNode*>& unitClause);
+ClauseNode* readCNFFile(int& varnum, int& clausenum,string& filename, Variable*& variableList, stack<ClauseNode*>& unitClause);
+
+//实现DPLL过程
+int DPLL(ClauseNode* header, Variable*& variableList, stack<ClauseNode*>& clauseStack, int*& solution, int& existing);
+
+//获取单子句的文字
+int getLiteralofUnit(ClauseNode* unitClause);
