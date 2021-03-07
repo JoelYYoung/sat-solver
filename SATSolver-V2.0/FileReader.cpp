@@ -7,7 +7,9 @@ ClauseNode* readCNFFile(int& varnum, int& clausenum,string& filename, Variable*&
 	ifstream fis(path);
 	if (!fis) {
 		cout << "File can NOT open." << endl;
-		exit;
+		getchar();
+		getchar();
+		return nullptr;
 	}
 	char ch;
 	char buf[100];

@@ -56,3 +56,9 @@ int getLiteralofUnit(ClauseNode* unitClause);
 
 // 定义一个函数，封装了DPLL过程的迭代实现（不用递归）
 int DPLLIterate(ClauseNode* header, Variable*& variableList, stack<ClauseNode*>& unitClauseStack, int varnum, int clausenum, int* solution);
+
+//Console交互函数，负责程序于客户的交互
+void startProgram();
+
+// 传入需要输出的参数，然后把求解的结果进行输出
+int verifyFormula(ClauseNode* header, int clausenum, int varifynum);

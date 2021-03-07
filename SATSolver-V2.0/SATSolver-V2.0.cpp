@@ -46,21 +46,22 @@ int main()
     stack<ClauseNode*> unitClause;
     Variable* variableList = nullptr;
     ClauseNode* header = readCNFFile(varnum, clausenum,filename, variableList, unitClause);
-    //cout << "Num of unitClause is " << unitClause.size() << endl;
     int* solution = (int*)malloc(sizeof(int) * varnum);
     int result;
     
     //计时功能
-    LARGE_INTEGER t1, t2, tc;
-    double time;
-    QueryPerformanceFrequency(&tc);
-    QueryPerformanceCounter(&t1);
-    //需计时的函数
-    //result = DPLL(header, variableList, unitClause, solution, clausenum);
-    result = DPLLIterate(header, variableList, unitClause, varnum, clausenum, solution);
-    QueryPerformanceCounter(&t2);
-    time = (double)(t2.QuadPart - t1.QuadPart) / (double)tc.QuadPart;
-    cout << "Result = " << result << endl;
-    cout << "Time = " << time << endl;  //输出时间（单位：ｓ）
-
+    //LARGE_INTEGER t1, t2, tc;
+    //double time;
+    //QueryPerformanceFrequency(&tc);
+    //QueryPerformanceCounter(&t1);
+    ////需计时的函数
+    ////result = DPLL(header, variableList, unitClause, solution, clausenum);
+    //result = DPLLIterate(header, variableList, unitClause, varnum, clausenum, solution);
+    //QueryPerformanceCounter(&t2);
+    //time = (double)(t2.QuadPart - t1.QuadPart) / (double)tc.QuadPart;
+    //cout << "Result = " << result << endl;
+    //cout << "Time = " << time << endl;  //输出时间（单位：ｓ）
+    
+    //测试Console的功能
+    startProgram();
 }
