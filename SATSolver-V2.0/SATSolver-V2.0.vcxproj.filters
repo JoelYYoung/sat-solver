@@ -27,6 +27,12 @@
     <ClCompile Include="DPLL.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="ResultOutput.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="DPLLIterate.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Global.h">

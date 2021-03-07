@@ -5,6 +5,7 @@
 #include <ctime>
 #include <stdlib.h>
 #include <stack>
+#include <windows.h>
 
 using namespace std;
 #define TRUE 1
@@ -52,3 +53,6 @@ int DPLL(ClauseNode* header, Variable*& variableList, stack<ClauseNode*>& clause
 
 //获取单子句的文字
 int getLiteralofUnit(ClauseNode* unitClause);
+
+// 定义一个函数，封装了DPLL过程的迭代实现（不用递归）
+int DPLLIterate(ClauseNode* header, Variable*& variableList, stack<ClauseNode*>& unitClauseStack, int varnum, int clausenum, int* solution);

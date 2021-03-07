@@ -1,7 +1,7 @@
 #include "Global.h"
 
 int DPLL(ClauseNode* header, Variable*& variableList, stack<ClauseNode*>& clauseStack, int*& solution, int& existing) {
-	cout << "Processing..." << endl;
+	//cout << "Processing..." << endl;
 	//cout << "sizeof clauseStack is " << clauseStack.size() << endl;
 	//cout << "S existing = " << existing << endl;
 	stack<ClauseNode*> deleteClause; //存储在DPLL过程中删除的子句的指针

@@ -141,7 +141,9 @@
   <ItemGroup>
     <ClCompile Include="CNF.cpp" />
     <ClCompile Include="DPLL.cpp" />
+    <ClCompile Include="DPLLIterate.cpp" />
     <ClCompile Include="FileReader.cpp" />
+    <ClCompile Include="ResultOutput.cpp" />
     <ClCompile Include="SATSolver-V2.0.cpp" />
   </ItemGroup>
   <ItemGroup>
