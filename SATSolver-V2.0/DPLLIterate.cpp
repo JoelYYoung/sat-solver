@@ -25,6 +25,7 @@ int DPLLIterate(ClauseNode* header, Variable*& variableList, stack<ClauseNode*>&
 			int variableValue = getLiteralofUnit(unitClause);
 			int variableID = abs(variableValue);
 			int variableIndex = variableID - 1;
+			solution[variableIndex] = variableValue > 0 ? 1 : -1;
 			assignedVariable.push(variableIndex);
 			variableList[variableIndex].flag = 1; //∏≥÷µ±‰¡ø
 			LiteralNode* literalPointer = variableList[variableIndex].firstLiteral;

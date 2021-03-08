@@ -63,5 +63,8 @@ int main()
     //cout << "Time = " << time << endl;  //输出时间（单位：ｓ）
     
     //测试Console的功能
-    startProgram();
+    /*startProgram();*/
+
+    int i[] = { 1, -1, 1, -1 , 1, 1,1,1,1,1,1,1,1,1};
+    showBoard(i, 3);
 }

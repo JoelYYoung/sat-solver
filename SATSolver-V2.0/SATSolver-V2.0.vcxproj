@@ -146,6 +146,7 @@
     <ClCompile Include="FileReader.cpp" />
     <ClCompile Include="ResultOutput.cpp" />
     <ClCompile Include="SATSolver-V2.0.cpp" />
+    <ClCompile Include="Soduku.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Global.h" />

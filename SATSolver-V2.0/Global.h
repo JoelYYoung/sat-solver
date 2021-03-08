@@ -62,3 +62,17 @@ void startProgram();
 
 // 传入需要输出的参数，然后把求解的结果进行输出
 int verifyFormula(ClauseNode* header, int clausenum, int varifynum);
+
+/*Soduku functions and structures*/
+// 输入棋盘大小输出分配的棋盘数组指针
+int* getBoard(int size);
+//输入棋盘数组指针和保存结果的数组指针，以及棋盘的大小，将结果输出到棋盘中
+void fillBoard(int* solution, int* board, int size);
+//输入棋盘数组指针和棋盘的大小，将棋盘打印出来,如果没填，则显示为空格
+void showBoard(int* board, int size);
+//输入棋盘数组指针和棋盘的大小，输出棋盘格局的
+void board2CNFFile(int* board, int size);
+//输入棋盘数组指针和棋盘的大小，以及种子，可以产生一个只有唯一解的棋盘
+void generateBoard(int* board, int size, int seed);
+//针对规则三，将3，4，5位辅助变元的编码变成一个对应的连续变元
+int variableID(int i, int j, int k, int l, int m, int size);
