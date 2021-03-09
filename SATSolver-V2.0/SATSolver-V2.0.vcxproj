@@ -140,9 +140,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="CNF.cpp" />
+    <ClCompile Include="Console.cpp" />
     <ClCompile Include="DPLL.cpp" />
+    <ClCompile Include="DPLLIterate.cpp" />
     <ClCompile Include="FileReader.cpp" />
+    <ClCompile Include="ResultOutput.cpp" />
     <ClCompile Include="SATSolver-V2.0.cpp" />
+    <ClCompile Include="Soduku.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Global.h" />

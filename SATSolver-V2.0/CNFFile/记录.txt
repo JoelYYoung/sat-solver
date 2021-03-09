@@ -1,0 +1,20 @@
+unSAT案例
+u-problem7-50 3.43518s 5.20979s
+u-problem10-100 失败
+unsat-5cnf-30 0.938714s 1.21856s
+4（unsatisfied）3.30657s 4.36336s
+7（unsatisfied）>10min
+8（unsatisfied）>10min
+9（unsatisfied）
+
+
+SAT案例
+ais10 ? 5.44617s 8.89839s
+sud00009 M 0.0098255s 
+sud00001 M 0.0277773s
+sud00012 M 0.153547s
+sud00021 M 0.157665s
+ec-iso-ukn009.shuffled-as.sat05-3632-1584 L >100000s
+eh-dp04s04.shuffled-1075 L >100000s
+6
+ 
