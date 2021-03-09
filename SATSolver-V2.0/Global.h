@@ -73,6 +73,12 @@ void showBoard(int* board, int size);
 //输入棋盘数组指针和棋盘的大小，输出棋盘格局的
 void board2CNFFile(int* board, int size);
 //输入棋盘数组指针和棋盘的大小，以及种子，可以产生一个只有唯一解的棋盘
-void generateBoard(int* board, int size, int seed);
+void generateBoard(int* board, int size);
 //针对规则三，将3，4，5位辅助变元的编码变成一个对应的连续变元
-int variableID(int i, int j, int k, int l, int m, int size);
+int variableID(int layer, int i, int j, int k, int l, int m, int size);
+//获取棋盘产生的子句总数
+int getClausenumOfBoard(int* board, int size);
+//获取棋盘产生的变元总数
+int getVarnumOfBoard(int* board, int size);
+//求解组合数
+int C(int n, int m);

@@ -65,6 +65,15 @@ int main()
     //测试Console的功能
     /*startProgram();*/
 
-    int i[] = { 1, -1, 1, -1 , 1, 1,1,1,1,1,1,1,1,1};
+    /*int i[64];
+    for (int j = 0; j < 64; j++) {
+        i[j] = 0;
+    }
     showBoard(i, 3);
+    cout << getVarnumOfBoard(i, 8)<<endl;*/
+    int i[64];
+    for (int j = 0; j < 64; j++) {
+        i[j] = 0;
+    }
+    board2CNFFile(i, 8);
 }
