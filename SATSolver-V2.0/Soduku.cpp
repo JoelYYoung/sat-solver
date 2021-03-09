@@ -61,6 +61,16 @@ void board2CNFFile(int* board, int size) {
 	int varnum = getVarnumOfBoard(board, size);
 	//写入文件头
 	fos << "p cnf " << varnum << " " << clausenum << endl;
+	//写入已经存在的文字
+	for (int i = 0; i < size * size; i++) {
+		if (board[i] == 1) {
+			fos << i + 1 << " 0" << endl;
+		}
+		else if (board[i] == -1) {
+			fos << -(i + 1) << " 0" << endl;
+		}
+	}
+	int count1 = 0;
 	//对规则一，将子句写入
 	for (int i = 0; i < size; i++) { //i表示每一行 和 每一列
 		for (int j = 0; j < size - 2; j++) { //选择连续的三个数
@@ -70,25 +80,66 @@ void board2CNFFile(int* board, int size) {
 			//列(j, i)
 			fos << variableID(2, 0, j, i, 0, 0, size) << " " << variableID(2, 0, j + 1, i, 0, 0, size) << " " << variableID(2, 0, j + 2, i, 0, 0, size) << " 0" << endl;
 			fos << -variableID(2, 0, j, i, 0, 0, size) << " " << -variableID(2, 0, j + 1, i, 0, 0, size) << " " << -variableID(2, 0, j + 2, i, 0, 0, size) << " 0" << endl;
+			count1 += 4;
 		}
 	}
+	cout << "规则一 " << count1<<endl;
 	//对规则二，将子句写入
-	for (int i = 0; i < size; i++) { //i表示每一行，每一列
-		//开始遍历多个变元
-
+	int count2 = 0;
+	vector<vector<int>> ans;
+	vector<int> temp;
+	int count = size / 2 + 1;
+	dfs(ans, temp, 1, size, count); // 生成组合数
+	cout << "num of ans" << ans.size() << endl;
+	while (!ans.empty()) {
+		vector<int> tmp = vector<int>{ ans.back() };
+		ans.pop_back();
+		for (int i = 0; i < size; i++) { //开始行，列遍历
+			//写入行正
+			for (int j = 0; j < count; j++) {
+				fos << variableID(2, 0, i, tmp[j] - 1, 0, 0, size)<<" ";
+			}
+			fos << "0" << endl;
+			//写入行负
+			for (int j = 0; j < count; j++) {
+				fos << -variableID(2, 0, i, tmp[j] - 1, 0, 0, size) << " ";
+			}
+			fos << "0" << endl;
+			//写入列正
+			for (int j = 0; j < count; j++) {
+				fos << variableID(2, 0, tmp[j] - 1, i, 0, 0, size) << " ";
+			}
+			fos << "0" << endl;
+			//写入列负
+			for (int j = 0; j < count; j++) {
+				fos << -variableID(2, 0, tmp[j] - 1, i, 0, 0, size) << " ";
+			}
+			fos << "0" << endl;
+			count2 += 4;
+		}
 	}
+	cout << "规则二 " << count2 << endl;
 	//对规则三，将子句写入
+	int count3 = 0;
+	int count4 = 0;
+	int count5 = 0;
+	int count6 = 0;
 	for (int i = 0; i < 2; i++) {
 		for (int j = 0; j < size; j++) {
 			for (int k = j + 1; k < size; k++) {
 				//需要写入诸如157或者057的子句
+				fos << variableID(3, i, j, k, 0, 0, size) << " 0" << endl; //还需要把最终代换的变元写进去
 				fos << -variableID(3,i,j,k,0,0,size) << " ";
 				for (int l = 0; l < size; l++) {
 					fos << -variableID(4, i, j, k, l, 0, size) << " ";
 				}
 				fos << "0" << endl;
+				count3 += 1;
+				count4 += 1;
 				for (int l = 0; l < size; l++) {
 					fos << variableID(3, i, j, k, 0, 0, size) << " " << variableID(4, i, j, k, l, 0, size) << " 0" << endl;
+					count3 += 1;
+					count4 += 1;
 				}
 				//下一层
 				for (int l = 0; l < size; l++) {
@@ -96,23 +147,33 @@ void board2CNFFile(int* board, int size) {
 					fos << -variableID(5, i, j, k, l, 1, size) << " " << variableID(4, i, j, k, l, 0, size) << " 0" << endl;
 					fos << -variableID(5, i, j, k, l, 0, size) << " " << variableID(4, i, j, k, l, 0, size) << " 0" << endl;
 					fos << variableID(5, i, j, k, l, 0, size) << " " << variableID(5, i, j, k, l, 1, size) << " " << -variableID(4, i, j, k, l, 0, size) << " 0"<<endl;
+					count3 += 3;
+					count5 += 3;
 					for (int m = 0; m < 2; m++) {
 						//需要写入诸如15731或者15730的子句
 						if(i == 0){ //
 							fos << variableID(2, 0, j, l, 0, 0, size) << " " << -variableID(5, i, j, k, l, m,size) << " 0" << endl;
 							fos << variableID(2, 0, k, l, 0, 0, size) << " " << -variableID(5, i, j, k, l, m, size) << " 0" << endl;
 							fos << -variableID(2, 0, j, l, 0, 0, size) << " " << -variableID(2, 0, k, l, 0, 0, size) << " " << variableID(5, i, j, k, l, m, size) << " 0" << endl;
+							count3 += 3;
+							count6 += 3;
 						}
 						else {
 							fos << variableID(2, 0, l, j, 0, 0, size) << " " << -variableID(5, i, j, k, l, m, size) << " 0" << endl;
 							fos << variableID(2, 0, l, k, 0, 0, size) << " " << -variableID(5, i, j, k, l, m, size) << " 0" << endl;
 							fos << -variableID(2, 0, l, j, 0, 0, size) << " " << -variableID(2, 0, l, k, 0, 0, size) << " " << variableID(5, i, j, k, l, m, size) << " 0" << endl;
+							count3 += 3;
+							count6 += 3;
 						}
 					}
 				}
 			}
 		}
 	}
+	cout << "规则三 " << count3 << endl;
+	cout << "157 ：" << count4 << endl;
+	cout << "1571 ：" << count5 << endl;
+	cout << "15781 ：" << count6 << endl;
 	fos.close();
 }
 
@@ -150,7 +211,7 @@ int getClausenumOfBoard(int* board, int size) {
 	//规则三
 	result += 2 * pow(size, 2) * (size - 1) * 3;
 	result += pow(size, 2) * (size - 1) * 3;
-	result += pow(size, 1) * (size - 1) * 9;
+	result += pow(size, 1) * (size - 1) * (size + 2);
 	//规则一
 	result += 2 * size * (size - 2) * 2;
 	//规则二
@@ -168,20 +229,37 @@ int getVarnumOfBoard(int* board, int size) {
 	return result;
 }
 
-//求解组合数的
-long long factorial(int n)
+//计算组合数
+long long C(int n, int m)
 {
-	long long m = 1;
-	for (int i = 1; i <= n; i++) {
-		m *= i;
-		return m;
+	if (m < n - m) m = n - m;
+	long long ans = 1;
+	for (int i = m + 1; i <= n; i++) ans *= i;
+	for (int i = 1; i <= n - m; i++) ans /= i;
+	return ans;
+}
+
+//得到拥有size/2+1位的全部组合，保存在fill中
+void getCombination(int start, int size, int layer, int* fill) {
+	//把数字填好
+
+}
+
+//组合数生成函数
+void dfs(vector<vector<int>>& ans,vector<int>& temp,int cur, int n, int k) //组合函数 从n个数中选出k个出来
+{
+	if (temp.size() + (n - cur + 1) < k) {
+		return;
 	}
+	// 记录合法的答案
+	if (temp.size() == k) {
+		ans.push_back(temp);
+		return;
+	}
+	// 考虑选择当前位置
+	temp.push_back(cur);
+	dfs(ans,temp,cur + 1, n, k);
+	temp.pop_back();
+	// 考虑不选择当前位置
+	dfs(ans,temp,cur + 1, n, k);
 }
-//求解组合数
-int C(int n, int m)
-{
-	return factorial(n) / (factorial(m) * factorial(n - m));
-}
-
-//输入size，生成对应的组合数，保存在一个二维数组中
-

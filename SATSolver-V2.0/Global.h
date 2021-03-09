@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include <stack>
 #include <windows.h>
+#include <vector>
 
 using namespace std;
 #define TRUE 1
@@ -81,4 +82,6 @@ int getClausenumOfBoard(int* board, int size);
 //获取棋盘产生的变元总数
 int getVarnumOfBoard(int* board, int size);
 //求解组合数
-int C(int n, int m);
+long long C(int n, int m);
+//组合数生成函数
+void dfs(vector<vector<int>>& ans, vector<int>& temp, int cur, int n, int k);
